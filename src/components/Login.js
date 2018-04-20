@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+
 import PropTypes from 'prop-types'
 // Material Styles
 import { withStyles } from 'material-ui/styles';
@@ -6,57 +7,122 @@ import { withStyles } from 'material-ui/styles';
 // Material design components
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
-import PermIdentity from 'material-ui-icons/PermIdentity';
-import LockOutline from 'material-ui-icons/LockOutline';
-import ArrowForward from 'material-ui-icons/ArrowForward';
+// import PermIdentity from 'material-ui-icons/PermIdentity';
+// import LockOutline from 'material-ui-icons/LockOutline';
+// import ArrowForward from 'material-ui-icons/ArrowForward';
 import {FormControl} from 'material-ui/Form';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
+import Input, { InputLabel } from 'material-ui/Input';
 import Button from 'material-ui/Button';
 import { LinearProgress } from 'material-ui/Progress';
 import Snackbar from 'material-ui/Snackbar';
-
+import Paper from 'material-ui/Paper';
+// import List from 'material-ui/List/List';
+// import ListItem from 'material-ui/List/ListItem';
+import Avatar from 'material-ui/Avatar';
+// import Checkbox from 'material-ui/Checkbox';
 // Constants
 import { EMAIL_REQUIRED, PASSWORD_REQUIRED, EMAIL_VALIDATE_ERROR } from '../constants/LoginActionTypes'
-
+const logo = require ('../images/user.png')
 const styles = theme => ({
     cvHeading: {
-        color: '#1565C0',
-        fontWeight: 'bold',
-        fontFamily: 'Liberation Mono',
-        fontSize:'50px'
+        color: '#ffffff',
+        // fontWeight: 'bold',
+        // fontFamily: 'Liberation Mono',
+         fontSize:'10px',
+marginBottom:'1%'
+         
+    },
+    welcomeText:{
+        color: '#ffffff',
+        fontSize:'25px',
+        marginTop:'5%'
     },
     root: {
-        textAlign: 'center'
+        textAlign: 'center',
+        
     },
-    rightGrid: {
-        background: '#F5F5F5',
-        height: '100vh',
-        textAlign: 'left',
-        margin: '0'
+    topGrid:
+    {
+        background:'#6a5acd',
+        height: '300px',
     },
+heading:{
+marginTop:'50px',
+marginLeft:'550px',
+borderColor:'#ffffff',
+borderStyle:'solid',
+borderWidth:'1px',
+width:'250px',
+height:'70px',
+background:'#6a5acd',
+},
+    // rightGrid: {
+    //     background: '#F5F5F5',
+    //     height: '100vh',
+    //     textAlign: 'left',
+    //     margin: '0'
+    // },
     loginDiv: {
         color: '#1565C0',
-        marginTop: '25%',
-        paddingLeft: '10%'
+        marginTop: '-10%',
+        marginLeft:'32%',
+        // paddingLeft: '10%'
+        width:'35%',
+        height:'380px'
     },
+    round:{
+        height:50,
+        width:50,
+        margin: 20,
+        
+         display: 'inline-block',
+        borderStyle:'solid',
+        borderWidth:'1px',
+         borderColor:'#808080',
+              },
     formControl: {
         width: '60%'
     },
     headLine: {
-        color: '#1565C0',
-        paddingBottom: '5%',
-        fontFamily: 'verdana'
+        color: '#808080',
+fontSize:'20px',
+            // fontFamily: 'verdana'
     },
     userIcon: {
         color: '#1565C0'
     },
+    mainDiv:{
+        width:'85%',
+        marginTop:'7%'
+    },
+    remPassword:
+    {
+        display: 'inline-block',
+        width:'70%'
+    },
+    chkLabel:{
+        fontSize:'14px',
+        color:'#808080'
+    },
+    signUp:{
+        display: 'inline-block',
+        color:'#808080'
+    },
+    signupButton:
+    {
+        textTransform: 'none',
+        fontSize: '14px',
+        color:'#808080',
+        background: '#ffffff',
+        
+    },
     button: {
         marginTop: '5%',
-        background: '#1565C0',
-        width: '60%',
-        borderRadius: '4px',
-        textTransform: 'none',
-        fontSize: '19px'
+        background: '#6a5acd',
+        width: '30%',
+        // borderRadius: '4px',
+        // textTransform: 'none',
+        fontSize: '14px'
     },
     ref:{
         color:'#1565C0',
@@ -68,7 +134,7 @@ const styles = theme => ({
     }
 
 });
-
+        
 const initialState = {
     email: "",
     completed:0
@@ -138,29 +204,37 @@ class Login extends Component {
        {/* {!loggingIn && clearInterval(this.timer)} */}
        {loggingIn && <LinearProgress mode="determinate" value={this.state.completed} />}
         <Grid container className={classes.root} spacing={0} alignItems={'center'}>
-            <Grid item xs >
+            <Grid item xs={12} className={classes.topGrid} >
+            <div className={classes.heading}>
                 <Typography type="display1" component='h3' className={classes.welcomeText}>
-                    Welcome to
+                   LOCALISATION
                 </Typography>
                 <Typography className={classes.cvHeading} type="display4" component='h2' >
-                CV Validator
+                YOUR TAGLINE GOES HERE
                 </Typography>
-
+</div>
             </Grid>
-            <Grid item xs className={classes.rightGrid} >
-                <div className={classes.loginDiv}>
+            
+            <Grid item xs={12} className={classes.rightGrid} >
+            
+                <Paper className={classes.loginDiv}>
+              
+                 <Avatar  src={logo} className={classes.round}>
+          
+        </Avatar>
                     <Typography type="display1" component="h3" className={classes.headLine}>
-                        Login
+                          LOGIN
                     </Typography>
+                 
                     <FormControl className={classes.formControl} >
-                        <InputLabel htmlFor="email">W3 ID</InputLabel>
+                        <InputLabel htmlFor="email">Username</InputLabel>
                         <Input
                             id="email" className={classes.input}
                             value={this.state.email}
                             onChange={event => this.setState({ email: event.target.value })}
-                            endAdornment={<InputAdornment position="end">
-                                <PermIdentity className={classes.userIcon}></PermIdentity>
-                            </InputAdornment>}
+                            /* endAdornment={<InputAdornment position="end">
+                                 <PermIdentity className={classes.userIcon}></PermIdentity> 
+                            </InputAdornment>} */
                         />
                     </FormControl>
                     <FormControl className={classes.formControl}>
@@ -170,20 +244,33 @@ class Login extends Component {
                             type='password'
                             value={this.state.password}
                             onChange={event => this.setState({ password: event.target.value })}
-                            endAdornment={
+                            /* endAdornment={
                                 <InputAdornment position="end">
                                     <LockOutline className={classes.userIcon}></LockOutline>
                                 </InputAdornment>
-                            }
-                        />
+                            } */
+                                                    />
+                       
                     </FormControl>
-
-
-                    <Button raised color="primary" className={classes.button} onClick={this.handleLogin.bind(this)}>
-                        Sign In <ArrowForward></ArrowForward>
-                    </Button>
-
-                </div>
+            <div className={classes.mainDiv}>
+               <div className={classes.remPassword}>
+                <input  type="checkbox" id={this.id}/>
+                <label className={classes.chkLabel}  htmlFor={this.id}>Remember Password</label>
+               </div>
+                  <div className={classes.signUp}> 
+                  <Button raised color="primary" className={classes.signupButton} >
+                        Sign up here! 
+                      
+                          </Button>  
+                
+                  </div>
+                                   </div>
+                 <Button raised color="primary" className={classes.button} onClick={this.handleLogin.bind(this)}>
+                        Sign In 
+                        {/* <ArrowForward></ArrowForward> */} 
+                          </Button>  
+<br></br>
+                </Paper>
                 <Snackbar SnackbarContentProps={{
                         classes: {
                             root: classes.snackbar
