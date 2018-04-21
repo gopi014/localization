@@ -7,19 +7,13 @@ import { withStyles } from 'material-ui/styles';
 // Material design components
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
-// import PermIdentity from 'material-ui-icons/PermIdentity';
-// import LockOutline from 'material-ui-icons/LockOutline';
-// import ArrowForward from 'material-ui-icons/ArrowForward';
 import {FormControl} from 'material-ui/Form';
 import Input, { InputLabel } from 'material-ui/Input';
 import Button from 'material-ui/Button';
 import { LinearProgress } from 'material-ui/Progress';
 import Snackbar from 'material-ui/Snackbar';
 import Paper from 'material-ui/Paper';
-// import List from 'material-ui/List/List';
-// import ListItem from 'material-ui/List/ListItem';
 import Avatar from 'material-ui/Avatar';
-// import Checkbox from 'material-ui/Checkbox';
 // Constants
 import { EMAIL_REQUIRED, PASSWORD_REQUIRED, EMAIL_VALIDATE_ERROR } from '../constants/LoginActionTypes'
 const logo = require ('../images/user.png')
@@ -29,7 +23,7 @@ const styles = theme => ({
         // fontWeight: 'bold',
         // fontFamily: 'Liberation Mono',
          fontSize:'10px',
-marginBottom:'1%'
+        marginBottom:'1%'
          
     },
     welcomeText:{
@@ -45,23 +39,17 @@ marginBottom:'1%'
     {
         background:'#6a5acd',
         height: '300px',
+        paddingTop:50
     },
-heading:{
-marginTop:'50px',
-marginLeft:'550px',
-borderColor:'#ffffff',
-borderStyle:'solid',
-borderWidth:'1px',
-width:'250px',
-height:'70px',
-background:'#6a5acd',
-},
-    // rightGrid: {
-    //     background: '#F5F5F5',
-    //     height: '100vh',
-    //     textAlign: 'left',
-    //     margin: '0'
-    // },
+    heading:{
+        borderColor:'#ffffff',
+        borderStyle:'solid',
+        borderWidth:'1px',
+        width:'250px',
+        height:'70px',
+        margin:'0px auto'
+    },
+
     loginDiv: {
         color: '#1565C0',
         marginTop: '-10%',
@@ -85,7 +73,7 @@ background:'#6a5acd',
     },
     headLine: {
         color: '#808080',
-fontSize:'20px',
+        fontSize:'20px',
             // fontFamily: 'verdana'
     },
     userIcon: {
@@ -120,8 +108,7 @@ fontSize:'20px',
         marginTop: '5%',
         background: '#6a5acd',
         width: '30%',
-        // borderRadius: '4px',
-        // textTransform: 'none',
+        color:'white',
         fontSize: '14px'
     },
     ref:{
@@ -244,27 +231,21 @@ class Login extends Component {
                             type='password'
                             value={this.state.password}
                             onChange={event => this.setState({ password: event.target.value })}
-                            /* endAdornment={
-                                <InputAdornment position="end">
-                                    <LockOutline className={classes.userIcon}></LockOutline>
-                                </InputAdornment>
-                            } */
                                                     />
                        
                     </FormControl>
             <div className={classes.mainDiv}>
                <div className={classes.remPassword}>
-                <input  type="checkbox" id={this.id}/>
-                <label className={classes.chkLabel}  htmlFor={this.id}>Remember Password</label>
+                 <input  type="checkbox" id={this.id}/>
+                 <label className={classes.chkLabel}  htmlFor={this.id}>Remember Password</label>
                </div>
-                  <div className={classes.signUp}> 
+                <div className={classes.signUp}> 
                   <Button raised color="primary" className={classes.signupButton} >
                         Sign up here! 
                       
-                          </Button>  
-                
-                  </div>
-                                   </div>
+                    </Button>  
+                </div>
+             </div>
                  <Button raised color="primary" className={classes.button} onClick={this.handleLogin.bind(this)}>
                         Sign In 
                         {/* <ArrowForward></ArrowForward> */} 
