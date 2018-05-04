@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "carbon-addons-data-viz-react": "^1.20.2",
     "carbon-components": "^8.16.0",
     "carbon-components-react": "^5.23.0",
     "carbon-icons": "^6.3.1",

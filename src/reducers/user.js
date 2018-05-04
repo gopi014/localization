@@ -6,7 +6,7 @@ const initialUserState = {
     loggedIn: false,
     error: {error:false,errorMessage:""},
     save:{save:false,message:""},
-    username:"",
+    username:"John Doe",
     empId:"",
     email:"",
 };

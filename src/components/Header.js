@@ -1,75 +1,117 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 // Material Styles
 import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
+import Drawer from 'material-ui/Drawer';
 import Typography from 'material-ui/Typography';
-import Avatar from 'material-ui/Avatar';
+// import Avatar from 'material-ui/Avatar';
 import classNames from 'classnames';
-import { Manager, Target, Popper } from 'react-popper';
-import Grow from 'material-ui/transitions/Grow';
-import Card, { CardActions, CardContent } from 'material-ui/Card';
-import Button from 'material-ui/Button';
-
-
+// import { Manager, Target, Popper } from 'react-popper';
+// import Grow from 'material-ui/transitions/Grow';
+// import Card, { CardActions, CardContent } from 'material-ui/Card';
+// import Button from 'material-ui/Button';
+import Icon from 'material-ui/Icon';
+import { ListItem, ListItemIcon, ListItemText} from 'material-ui/List';
+// import Divider from 'material-ui/Divider';
+// import { MenuItem } from 'material-ui/Menu';
+import Paper from 'material-ui/Paper';
+import {drawerMenuOptions} from '../data/data'
+import Dashboard from './Dashboard';
 
 const styles = theme => ({
     root: {
-        width: '100%',
-    },
-    cvdata:{
-        marginLeft:'10px',
-        marginRight:'10px'
-
+        textAlign: 'center',
+        background: '#212121',
+        padding: '100px',
+        overflow: 'none',
+        height: '69.8vh'
     },
     flex: {
         flex: 1,
-        marginLeft:'700px'
+        marginRight: 20,
+        color: '#78C893',
+        fontSize: 14,
+        textAlign: 'right'
+    },
+    icon: {
+        fontSize: 40
     },
     menuButton: {
         marginLeft: -12,
         marginRight: 20,
     },
+    userImage: {
+
+    },
     appBar: {
-        background: "#50C0F2",
-        minHeight: 50
+        background: "#2B2B2B",
+        height: '8vh',
+        width: '80%',
+        marginRight:3
     },
     username: {
-        fontSize: 16,
+        fontSize: 12,
         padding: 8,
-        marginRight: 20
+        marginRight: 20,
+        color: '#78C893'
     },
-
-    popperClose: {
-        pointerEvents: 'none',
+    drawerPaper: {
+        position: 'fixed',
+        width: '267px',
+        background:'#78C893',
+   },
+    cvHeading: {
+        color: '#F3FFF7',
+        // fontWeight: 'bold',
+        // fontFamily: 'Liberation Mono',
+        fontSize: '10px',
+        marginBottom: '1%'
     },
-    card: {
-        minWidth: 240,
-        backgroundColor: '#232732',
-        height: 80
+    welcomeText: {
+            color: '#F3FFF7',
+            fontSize: '16px',
+            marginTop: '5%'
     },
-    popperTitle: {
-        color: '#50c0f2',
-        textSize: 16
+    heading: {
+        borderColor: '#ffffff',
+        borderStyle: 'solid',
+        borderWidth: '1px',
+        width: '160px',
+        height: '50px',
+        margin: 'auto',
+        background:'transparent',
+        boxShadow:'none',
+        marginTop:15
     },
-    button: {
-        background: 'none',
-        border: '1px solid #50C0F2',
-        color: '#50c0f2',
-        borderRadius: '1px',
-        textTransform: 'none',
-        fontSize: '14px',
-        float: 'right',
-        marginRight: 10
+    menuPaper:{
+        background:'transparent',
+        boxShadow:'none',
+        marginTop:30
     },
-    table: {
-        minWidth: 700,
+    menuOptiontext:{
+        textAlign:'left',
+        color:'#F3FFF7'
+    },
+    selected:{
+        background:'#212121',
+        '&:hover' :{
+            background: '#212121',
+        }
+    },
+    content:{
+        marginLeft:220,
+        marginTop:-20,
+        width:'80%',
+    },
+    title:{
+        textAlign:'left',
     }
 });
 
 const initialState = {
-    popperOpen: false,
+index:0
 };
 
 
@@ -78,73 +120,76 @@ class Header extends Component {
         super(props);
         this.state = initialState;
     }
-    handlePopperOpen = () => {
-        this.setState({ popperOpen: true });
-    };
 
-    handlePopperClose = () => {
-        this.setState({ popperOpen: false });
-    };
     handleLogout = () => {
         this.props.logOut();
-    }
-
-
+    };
+    handleClickListItem = (index) => {  
+          this.setState({index:index});
+    };
 
     render() {
         const { user, classes } = this.props;
         const username = user.username;
-        const email = user.email;
-        const empId = user.empId;
-        const { popperOpen } = this.state;
-
+        // const logo = require('../images/user.png');
+        const mainMenuListItems = (
+            <div>
+              {drawerMenuOptions.map((option,index) =>
+                <ListItem button  key={option.title} className={index===this.state.index? classes.selected:""} onClick={()=>{this.handleClickListItem(index)}}>
+                    <ListItemIcon>
+                    <Icon className={classes.menuOptiontext}>
+                       {option.iconName}
+                    </Icon>
+                    </ListItemIcon>
+                    <ListItemText  primary={<Typography  className={classes.menuOptiontext}>{option.title}</Typography>}/>
+                </ListItem>
+                )}
+            </div>
+          );
+    
         return (
             <div className={classes.root}>
-                <AppBar position="fixed" className={classNames(classes.appBar)}>
+                <AppBar position="absolute" className={classNames(classes.appBar)}>
                     <Toolbar>
                         <Typography type="title" color="inherit" className={classes.flex}>
-                            CV Validator
+                            Welcome {username}
                         </Typography>
-                        {/* <Avatar src={require('../images/DSC_0190.jpg')} */}
-                        <Avatar src={'https://faces.tap.ibm.com/imagesrv/' + empId}
 
-                        />
-                        <Manager onMouseOut={this.handlePopperClose}>
-                            <Target >
-                                <Typography type="title" color="inherit" onMouseOver={this.handlePopperOpen}
-                                    className={classes.username}>
-                                    {username}
-                                </Typography>
-                            </Target>
-                            <Popper
-                                placement="bottom-start"
-                                eventsEnabled={popperOpen}
-                                className={!popperOpen ? classes.popperClose : ''}
-                                onMouseOver={this.handlePopperOpen}
-                            >
-                                <Grow in={popperOpen} style={{ transformOrigin: '0 0 0' }}>
-                                    <Card className={classes.card} >
-                                        <CardContent>
-                                            <Typography className={classes.popperTitle}>{email}</Typography>
-                                            <Button raised color="primary" onClick={this.handleLogout.bind(this)} className={classes.button}>
-                                                LogOut
-                                             </Button>
-                                        </CardContent>
-                                        <CardActions>
-                                        </CardActions>
-                                    </Card>
-                                </Grow>
-                            </Popper>
-                        </Manager>
+                        <Icon className={classes.icon}>account_circle</Icon>
+
                     </Toolbar>
                 </AppBar>
-                <div style={{marginTop:'100px'}} className={classes.cvdata}>
-				</div>
+                <Drawer
+                    type="persistent"
+                    classes={{
+                        paper: classes.drawerPaper,
+                    }}
+                    open={true}
+                >
+                    <div className={classes.toolbar}>
+                    <Paper className={classes.heading}>
+                    <Typography type="display1" component='h3' className={classes.welcomeText}>
+                        LOCALISATION
+                    </Typography>
+                    <Typography className={classes.cvHeading} type="display4" component='h2' >
+                        YOUR TAGLINE GOES HERE
+                    </Typography>
+                </Paper> 
+                <Paper className={classes.menuPaper}>
+                    {mainMenuListItems}
+                    </Paper>
+                   </div>
+                </Drawer>
+                <div className={classes.content}>
+                    {this.state.index===0 && <Dashboard/>}
+                </div> 
             </div>
+            
         )
     }
 }
 Header.propTypes = {
     classes: PropTypes.object.isRequired
 }
-export default withStyles(styles)(Header);
+
+  export default withStyles(styles)(Header);

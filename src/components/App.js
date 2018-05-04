@@ -5,15 +5,16 @@ import { connect } from 'react-redux'
 import Login from './Login'
 import Header from './Header'
 import * as AllActions from '../actions'
+// import Dashboard from './Dashboard'
 
 class App extends Component{
  
   render() {
     const { user } = this.props;
-    if(user.loggedIn){
+    if(!user.loggedIn){
         return(    
           <div>
-          <Header user={user}  logOut={this.props.actions.logOut} ></Header>
+        <Header user={user}  logOut={this.props.actions.logOut} ></Header>
           </div>
         )
      
@@ -21,6 +22,7 @@ class App extends Component{
       return (
         <div>
         <Login user={user} loginUser={this.props.actions.loginUser} LoginValidate={this.props.actions.LoginValidate} />
+       {/* <Dashboard/> */}
         </div>
           );
      }

@@ -1,9 +1,11 @@
-import * as loginTypes from '../constants/LoginActionTypes'
+import * as loginTypes from '../constants/LoginActionTypes';
+// import * as pageTypes from '../constants/PageActionTypes';
 import axios from "axios";
 
 //const serverUrl="http://localhost:6003";
 const serverUrl="";
 axios.defaults.headers.post['Content-Type'] = 'application/json';
+
 export function LoginValidate(status) {
   return function (dispatch) {
     dispatch({
@@ -75,7 +77,6 @@ export function logOut() {
         token: ""
       }
     });
-
 
   }
 }

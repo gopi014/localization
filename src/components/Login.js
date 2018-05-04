@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles';
 
 // Material design components
-import Grid from 'material-ui/Grid';
+// import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import { FormControl } from 'material-ui/Form';
 import Input, { InputLabel } from 'material-ui/Input';
@@ -24,22 +24,17 @@ const styles = theme => ({
         // fontFamily: 'Liberation Mono',
         fontSize: '10px',
         marginBottom: '1%'
-
-    },
+        },
     welcomeText: {
-        color: '#ffffff',
-        fontSize: '25px',
-        marginTop: '5%'
-    },
+       color: '#ffffff',
+       fontSize: '25px',
+       marginTop: '5%'
+       },
     root: {
         textAlign: 'center',
-
-    },
-    topGrid:
-        {
-            background: '#6a5acd',
-            height: '300px',
-            paddingTop: 50
+        height:'660px',
+        background:'#333333',
+        padding:'100px'
         },
     heading: {
         borderColor: '#ffffff',
@@ -47,16 +42,16 @@ const styles = theme => ({
         borderWidth: '1px',
         width: '250px',
         height: '70px',
-        margin: '0px auto'
-    },
-
+        margin: 'auto',
+        background:'#333333'
+            },
     loginDiv: {
-        color: '#1565C0',
-        marginTop: '-10%',
-        marginLeft: '32%',
+        background: '#404040',
+        marginTop: '5%',
+        marginLeft: '30%',
         // paddingLeft: '10%'
-        width: '35%',
-        height: '380px'
+        width: '40%',
+        height: '340px'
     },
     round: {
         height: 50,
@@ -69,47 +64,60 @@ const styles = theme => ({
         borderColor: '#808080',
     },
     formControl: {
-        width: '60%'
+        width: '80%'
     },
     headLine: {
-        color: '#808080',
+        color: '#80ffaa',
         fontSize: '20px',
-        // fontFamily: 'verdana'
     },
     userIcon: {
         color: '#1565C0'
     },
-    mainDiv: {
-        width: '85%',
-        marginTop: '7%'
+    input:{
+        color:'#ffffff',
+        borderColor: '#ffffff',
+        fontSize:12
     },
-    remPassword:
-        {
-            display: 'inline-block',
-            width: '70%'
-        },
+    mainDiv: {
+        width: '100%',
+        marginTop: '4%',
+        // marginLeft:'-25px'
+    },
+    remPassword:{
+        display: 'inline-block',
+        width: '80%',
+        marginLeft:'-100px'
+    },
     chkLabel: {
         fontSize: '14px',
         color: '#808080'
     },
     signUp: {
         display: 'inline-block',
-        color: '#808080'
+        color: '#808080',
+        // marginLeft:'30px'
     },
-    signupButton:
-        {
-            textTransform: 'none',
-            fontSize: '14px',
-            color: '#808080',
-            background: '#ffffff',
-
+    signupButton:{
+        textTransform: 'none',
+        fontSize: '14px',
+        color: '#80ffaa',
+        background: 'transparent',
+        border:'none',
+        boxShadow:'none',
+        '&:hover' :{
+            background: 'transparent',
+        }
         },
     button: {
         marginTop: '5%',
-        background: '#6a5acd',
-        width: '30%',
-        color: 'white',
-        fontSize: '14px'
+        background: '#78C893',
+        width: '100%',
+        height:'50px',
+        color: '#ffffff',
+        fontSize: '14px',
+        '&:hover' :{
+            background: '#78C893',
+        }
     },
     ref: {
         color: '#1565C0',
@@ -118,6 +126,16 @@ const styles = theme => ({
     },
     snackbar: {
         background: 'red'
+    },
+    inputBottom:{
+        color:'white',
+        fontSize:12,
+        '&:after': {
+            backgroundColor:'white',
+          },
+        '&:before':{
+            backgroundColor:'white'
+        }
     }
 
 });
@@ -186,63 +204,59 @@ class Login extends Component {
         const { classes } = this.props;
         const { error, loggingIn } = this.props.user;
         return (
-            <div>
+            <div className={classes.root}>
                 {/* {!loggingIn && clearInterval(this.timer)} */}
                 {loggingIn && <LinearProgress mode="determinate" value={this.state.completed} />}
-                <Grid container className={classes.root} spacing={0} alignItems={'center'}>
-                    <Grid item xs={12} className={classes.topGrid} >
-                        <div className={classes.heading}>
-                            <Typography type="display1" component='h3' className={classes.welcomeText}>
-                                LOCALISATION
+                <Paper className={classes.heading}>
+                    <Typography type="display1" component='h3' className={classes.welcomeText}>
+                        LOCALISATION
                     </Typography>
-                            <Typography className={classes.cvHeading} type="display4" component='h2' >
-                                YOUR TAGLINE GOES HERE
-                     </Typography>
-                        </div>
-                    </Grid>
-
-                    <Grid item xs={12} className={classes.rightGrid} >
-                        <Paper className={classes.loginDiv}>
-                            <Avatar src={logo} className={classes.round}>
-                            </Avatar>
-                            <Typography type="display1" component="h3" className={classes.headLine}>
-                                LOGIN
+                    <Typography className={classes.cvHeading} type="display4" component='h2' >
+                        YOUR TAGLINE GOES HERE
                     </Typography>
-                            <FormControl className={classes.formControl} >
-                                <InputLabel htmlFor="email">Username</InputLabel>
-                                <Input
-                                    id="email" className={classes.input}
-                                    value={this.state.email}
-                                    onChange={event => this.setState({ email: event.target.value })}
-                                />
-                            </FormControl>
-                            <FormControl className={classes.formControl}>
-                                <InputLabel htmlFor="password">Password</InputLabel>
-                                <Input
-                                    id="password" className={classes.input}
-                                    type='password'
-                                    value={this.state.password}
-                                    onChange={event => this.setState({ password: event.target.value })}
-                                />
-                            </FormControl>
-                            <div className={classes.mainDiv}>
-                                <div className={classes.remPassword}>
-                                    <input type="checkbox" id={this.id} />
-                                    <label className={classes.chkLabel} htmlFor={this.id}>Remember Password</label>
-                                </div>
-                                <div className={classes.signUp}>
-                                    <Button raised color="primary" className={classes.signupButton} >
-                                        Sign up here!
-                        </Button>
-                                </div>
+                </Paper> 
+                <Paper className={classes.loginDiv}>
+                    <Avatar src={logo} className={classes.round}>
+                    </Avatar>
+                    <Typography type="display1" component="h3" className={classes.headLine}>
+                        LOGIN
+                    </Typography>
+                    <FormControl className={classes.formControl} >
+                        <InputLabel htmlFor="email"  className={classes.input}>Username</InputLabel>
+                        <Input
+                            id="email" className={classes.inputBottom}
+                            value={this.state.email}
+                            onChange={event => this.setState({ email: event.target.value })}
+                        />
+                    </FormControl>
+                    <FormControl className={classes.formControl}>
+                        <InputLabel htmlFor="password" className={classes.input}>Password</InputLabel>
+                        <Input
+                            id="password"
+                            className={classes.inputBottom}
+                            type='password'
+                            value={this.state.password}
+                            onChange={event => this.setState({ password: event.target.value })}
+                        />
+                    </FormControl>
+                        <div className={classes.mainDiv}>
+                            <div className={classes.remPassword}>
+                                <input type="checkbox" id={this.id} />
+                                <label className={classes.chkLabel} htmlFor={this.id}>Remember Password</label>
                             </div>
-                            <Button raised color="primary" className={classes.button} onClick={this.handleLogin.bind(this)}>
-                                Sign In
+                            <div className={classes.signUp}>
+                                <Button raised color="primary" className={classes.signupButton} >
+                                    Sign up here!
+                                </Button>
+                            </div>
+                        </div>
+                    <Button raised color="primary" className={classes.button} onClick={this.handleLogin.bind(this)}>
+                        Sign In
                     </Button>
-                        </Paper>
-                        <Snackbar SnackbarContentProps={{
+                </Paper>
+                <Snackbar SnackbarContentProps={{
                             classes: {
-                                root: classes.snackbar
+                                  root: classes.snackbar
                             }
                         }}
                             anchorOrigin={{
@@ -254,8 +268,10 @@ class Login extends Component {
                             autoHideDuration={1500}
                             message={error.errorMessage}
                         />
-                    </Grid>
-                </Grid>
+                        {/* </div> */}
+                
+                {/* </div> */}
+            
             </div>
         )
     }
